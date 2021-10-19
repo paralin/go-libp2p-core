@@ -37,6 +37,11 @@ func GenerateEd25519Key(src io.Reader) (PrivKey, PubKey, error) {
 		nil
 }
 
+// GetEd25519PrivateKey returns the stdlib ed25519 key.
+func (k *Ed25519PrivateKey) GetEd25519PrivateKey() ed25519.PrivateKey {
+	return k.k
+}
+
 // Type of the private key (Ed25519).
 func (k *Ed25519PrivateKey) Type() pb.KeyType {
 	return pb.KeyType_Ed25519
@@ -76,6 +81,11 @@ func (k *Ed25519PrivateKey) GetPublic() PubKey {
 // Sign returns a signature from an input message.
 func (k *Ed25519PrivateKey) Sign(msg []byte) ([]byte, error) {
 	return ed25519.Sign(k.k, msg), nil
+}
+
+// GetEd25519PublicKey returns the stdlib ed25519 key.
+func (k *Ed25519PublicKey) GetEd25519PublicKey() ed25519.PublicKey {
+	return k.k
 }
 
 // Type of the public key (Ed25519).

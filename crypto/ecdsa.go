@@ -102,6 +102,11 @@ func UnmarshalECDSAPublicKey(data []byte) (PubKey, error) {
 	return &ECDSAPublicKey{pub}, nil
 }
 
+// GetECDSAPrivateKey returns the stdlib ECDSA private key.
+func (ePriv *ECDSAPrivateKey) GetECDSAPrivateKey() *ecdsa.PrivateKey {
+	return ePriv.priv
+}
+
 // Type returns the key type
 func (ePriv *ECDSAPrivateKey) Type() pb.KeyType {
 	return pb.KeyType_ECDSA
@@ -134,6 +139,11 @@ func (ePriv *ECDSAPrivateKey) Sign(data []byte) ([]byte, error) {
 // GetPublic returns a public key
 func (ePriv *ECDSAPrivateKey) GetPublic() PubKey {
 	return &ECDSAPublicKey{&ePriv.priv.PublicKey}
+}
+
+// GetECDSAPublicKey returns the stdlib ECDSA public key.
+func (ePub *ECDSAPublicKey) GetECDSAPublicKey() *ecdsa.PublicKey {
+	return ePub.pub
 }
 
 // Type returns the key type
