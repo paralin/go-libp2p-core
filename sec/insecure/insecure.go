@@ -180,7 +180,7 @@ func (ic *Conn) runHandshakeSync() error {
 func readWriteMsg(rw io.ReadWriter, out *pb.Exchange) (*pb.Exchange, error) {
 	const maxMessageSize = 1 << 16
 
-	outBytes, err := out.Marshal()
+	outBytes, err := out.MarshalVT()
 	if err != nil {
 		return nil, err
 	}
@@ -204,7 +204,7 @@ func readWriteMsg(rw io.ReadWriter, out *pb.Exchange) (*pb.Exchange, error) {
 		return nil, err2
 	}
 	inMsg := new(pb.Exchange)
-	err = inMsg.Unmarshal(msg)
+	err = inMsg.UnmarshalVT(msg)
 	return inMsg, err
 }
 

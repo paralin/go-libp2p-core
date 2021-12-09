@@ -12,8 +12,8 @@ import (
 
 	pool "github.com/libp2p/go-buffer-pool"
 
-	"github.com/gogo/protobuf/proto"
 	"github.com/multiformats/go-varint"
+	"google.golang.org/protobuf/proto"
 )
 
 // Envelope contains an arbitrary []byte payload, signed by a libp2p peer.
@@ -200,13 +200,13 @@ func (e *Envelope) Marshal() (res []byte, err error) {
 		return nil, err
 	}
 
-	msg := pb.Envelope{
+	msg := &pb.Envelope{
 		PublicKey:   key,
 		PayloadType: e.PayloadType,
 		Payload:     e.RawPayload,
 		Signature:   e.signature,
 	}
-	return proto.Marshal(&msg)
+	return msg.MarshalVT()
 }
 
 // Equal returns true if the other Envelope has the same public key,

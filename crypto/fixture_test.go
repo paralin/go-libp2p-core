@@ -67,7 +67,7 @@ func TestFixtures(t *testing.T) {
 				t.Fatal(err)
 			}
 			if !bytes.Equal(pubBytes2, pubBytes) {
-				t.Fatal("encoding round-trip failed")
+				t.Fatalf("encoding round-trip failed: %v != %v", pubBytes2, pubBytes)
 			}
 			priv, err := crypto.UnmarshalPrivateKey(privBytes)
 			if err != nil {

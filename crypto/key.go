@@ -14,7 +14,7 @@ import (
 
 	pb "github.com/libp2p/go-libp2p-core/crypto/pb"
 
-	"github.com/gogo/protobuf/proto"
+	"google.golang.org/protobuf/proto"
 )
 
 const (
@@ -169,7 +169,7 @@ func GenerateEKeyPair(curveName string) ([]byte, GenSharedKey, error) {
 // representative object
 func UnmarshalPublicKey(data []byte) (PubKey, error) {
 	pmes := new(pb.PublicKey)
-	err := proto.Unmarshal(data, pmes)
+	err := pmes.UnmarshalVT(data)
 	if err != nil {
 		return nil, err
 	}
@@ -194,7 +194,7 @@ func PublicKeyFromProto(pmes *pb.PublicKey) (PubKey, error) {
 
 	switch tpk := pk.(type) {
 	case *RsaPublicKey:
-		tpk.cached, _ = pmes.Marshal()
+		tpk.cached, _ = pmes.MarshalVT()
 	}
 
 	return pk, nil
@@ -208,7 +208,7 @@ func MarshalPublicKey(k PubKey) ([]byte, error) {
 		return nil, err
 	}
 
-	return proto.Marshal(pbmes)
+	return pbmes.MarshalVT()
 }
 
 // PublicKeyToProto converts a public key object into an unserialized
@@ -251,7 +251,7 @@ func MarshalPrivateKey(k PrivKey) ([]byte, error) {
 	}
 
 	pbmes.Data = data
-	return proto.Marshal(pbmes)
+	return pbmes.MarshalVT()
 }
 
 // ConfigDecodeKey decodes from b64 (for config file) to a byte array that can be unmarshalled.

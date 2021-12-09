@@ -87,7 +87,7 @@ func TestMarshalLoop(t *testing.T) {
 				}
 
 				pbmes.Data = append(data, data[len(data)-ed25519.PublicKeySize:]...)
-				return pbmes.Marshal()
+				return pbmes.MarshalVT()
 			},
 		} {
 			t.Run(name, func(t *testing.T) {
@@ -155,7 +155,7 @@ func TestUnmarshalErrors(t *testing.T) {
 				Data: []byte{42},
 			}
 
-			data, err := pbmes.Marshal()
+			data, err := pbmes.MarshalVT()
 			if err != nil {
 				t.Fatal(err)
 			}
@@ -183,7 +183,7 @@ func TestUnmarshalErrors(t *testing.T) {
 
 			// Append the private key instead of the public key.
 			pbmes.Data = append(data, data[:ed25519.PublicKeySize]...)
-			b, err := pbmes.Marshal()
+			b, err := pbmes.MarshalVT()
 			if err != nil {
 				t.Fatal(err)
 			}
@@ -203,7 +203,7 @@ func TestUnmarshalErrors(t *testing.T) {
 				Data: []byte{42},
 			}
 
-			data, err := pbmes.Marshal()
+			data, err := pbmes.MarshalVT()
 			if err != nil {
 				t.Fatal(err)
 			}

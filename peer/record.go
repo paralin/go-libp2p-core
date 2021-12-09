@@ -11,7 +11,7 @@ import (
 
 	ma "github.com/multiformats/go-multiaddr"
 
-	"github.com/gogo/protobuf/proto"
+	"google.golang.org/protobuf/proto"
 )
 
 var _ record.Record = (*PeerRecord)(nil)
@@ -193,7 +193,7 @@ func (r *PeerRecord) MarshalRecord() (res []byte, err error) {
 	if err != nil {
 		return nil, err
 	}
-	return proto.Marshal(msg)
+	return msg.MarshalVT()
 }
 
 // Equal returns true if the other PeerRecord is identical to this one.
