@@ -10,7 +10,7 @@ import (
 	pb "github.com/libp2p/go-libp2p-core/record/pb"
 	"github.com/libp2p/go-libp2p-core/test"
 
-	"github.com/gogo/protobuf/proto"
+	"github.com/golang/protobuf/proto"
 )
 
 type simpleRecord struct {

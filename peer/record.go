@@ -10,7 +10,7 @@ import (
 
 	ma "github.com/multiformats/go-multiaddr"
 
-	"github.com/gogo/protobuf/proto"
+	"github.com/golang/protobuf/proto"
 )
 
 var _ record.Record = (*PeerRecord)(nil)

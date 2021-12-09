@@ -11,7 +11,7 @@ import (
 
 	pool "github.com/libp2p/go-buffer-pool"
 
-	"github.com/gogo/protobuf/proto"
+	"github.com/golang/protobuf/proto"
 	"github.com/multiformats/go-varint"
 )
 

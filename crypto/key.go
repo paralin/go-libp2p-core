@@ -14,7 +14,7 @@ import (
 
 	pb "github.com/libp2p/go-libp2p-core/crypto/pb"
 
-	"github.com/gogo/protobuf/proto"
+	"github.com/golang/protobuf/proto"
 )
 
 const (
@@ -194,7 +194,7 @@ func PublicKeyFromProto(pmes *pb.PublicKey) (PubKey, error) {
 
 	switch tpk := pk.(type) {
 	case *RsaPublicKey:
-		tpk.cached, _ = pmes.Marshal()
+		tpk.cached, _ = proto.Marshal(pmes)
 	}
 
 	return pk, nil

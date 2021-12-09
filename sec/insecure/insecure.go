@@ -9,6 +9,7 @@ import (
 	"io"
 	"net"
 
+	"github.com/golang/protobuf/proto"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/libp2p/go-libp2p-core/sec"
 	"github.com/libp2p/go-msgio"
@@ -180,7 +181,7 @@ func (ic *Conn) runHandshakeSync() error {
 func readWriteMsg(rw io.ReadWriter, out *pb.Exchange) (*pb.Exchange, error) {
 	const maxMessageSize = 1 << 16
 
-	outBytes, err := out.Marshal()
+	outBytes, err := proto.Marshal(out)
 	if err != nil {
 		return nil, err
 	}
@@ -204,7 +205,7 @@ func readWriteMsg(rw io.ReadWriter, out *pb.Exchange) (*pb.Exchange, error) {
 		return nil, err2
 	}
 	inMsg := new(pb.Exchange)
-	err = inMsg.Unmarshal(msg)
+	err = proto.Unmarshal(msg, inMsg)
 	return inMsg, err
 }
 
