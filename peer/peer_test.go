@@ -82,7 +82,7 @@ func (ks *keyset) load(hpkp, skBytesStr string) error {
 	ks.hpk = string(hash(bpk))
 	ks.hpkp = b58.Encode([]byte(ks.hpk))
 	if ks.hpkp != hpkp {
-		return fmt.Errorf("hpkp doesn't match key. %s", hpkp)
+		return fmt.Errorf("hpkp doesn't match key. %s != %s", hpkp, ks.hpkp)
 	}
 	return nil
 }
@@ -270,7 +270,7 @@ func TestValidate(t *testing.T) {
 	}
 }
 
-var hpkpMan = `QmcJeseojbPW9hSejUM1sQ1a2QmbrryPK4Z8pWbRUPaYEn`
+var hpkpMan = `Qmf5oG5FFFw2H2nAhVjeF8oM5GAC9sk6rPe2oaK1jRtU11`
 var skManBytes = `
 CAASqAkwggSkAgEAAoIBAQC3hjPtPli71gFNzGJ6rUhYdb65BDwW7IrniEaZKi6z
 tW4Iz0MouEJY8GPG1iQfqZKp5w9H2ENh4I1bk2dsezrJ7Nneg4Eqd78CmeHTAgaP
